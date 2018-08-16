@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#define DEFAULT_CAPACITY 8000000
+
 class BinaryHeap {
 
     public:
@@ -8,7 +10,7 @@ class BinaryHeap {
     int capacity;
     int size;
     bool is_min;
- 
+
     BinaryHeap(int *arr, int sz, bool is_mn, int cap) {
         is_min = is_mn;
         capacity = cap;
@@ -24,6 +26,7 @@ class BinaryHeap {
         if (size > 0) {
             return heap[0];
         }
+        printf("Heap is empty\n");
         return 0;
     }
 
@@ -35,6 +38,7 @@ class BinaryHeap {
             heapify(0);
             return root;
         } else {
+            printf("Heap is empty, cannot delete root\n");
             return 0;
         }
     }
@@ -200,11 +204,19 @@ class BinaryHeap {
 class MinHeap: public BinaryHeap {
     public:
 
+    MinHeap(): BinaryHeap(NULL, 0, true, DEFAULT_CAPACITY) {}
+
+    MinHeap(int cap): BinaryHeap(NULL, 0, true, cap) {}
+
     MinHeap(int *arr, int sz, int cap): BinaryHeap(arr, sz, true, cap) {}
 };
 
 class MaxHeap: public BinaryHeap {
     public:
+
+    MaxHeap(): BinaryHeap(NULL, 0, false, DEFAULT_CAPACITY) {}
+
+    MaxHeap(int cap): BinaryHeap(NULL, 0, false, cap) {}
 
     MaxHeap(int *arr, int sz, int cap): BinaryHeap(arr, sz, false, cap) {}
 };
@@ -223,9 +235,9 @@ void print_array(int *arr, int size) {
         }
     }
 }
- 
+
 int main() {
- 
+
     printf("\n--- TESTING MIN HEAP ---\n\n");
 
     int arr[7] = {2,5,4,6,9,1,10};
@@ -283,4 +295,3 @@ int main() {
 
     return 0;
 }
-    
