@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <iostream>
 
 #define DEFAULT_CAPACITY 8000000
 
@@ -26,8 +27,8 @@ class BinaryHeap {
         if (size > 0) {
             return heap[0];
         }
-        printf("Heap is empty\n");
-        return 0;
+        std:cerr << "Heap is empty, cannot peek root\n";
+        abort();
     }
 
     int delete_root() {
@@ -38,15 +39,15 @@ class BinaryHeap {
             heapify(0);
             return root;
         } else {
-            printf("Heap is empty, cannot delete root\n");
-            return 0;
+            std:cerr << "Heap is empty, cannot delete root\n";
+            abort();
         }
     }
 
     void insert(int v) {
         if (size == capacity) {
-            printf("Heap exceeds maximum capacity\n");
-            return;
+            std:cerr << "Heap exceeds maximum capacity\n";
+            abort();
         }
 
         heap[size] = v;
